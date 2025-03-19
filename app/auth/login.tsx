@@ -1,4 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,6 +13,7 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [debug, setDebug] = useState("");
   const { signIn } = useAuth();
+  const router = useRouter();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -86,6 +88,15 @@ export default function LoginScreen() {
       >
         <Text style={tw`text-black dark:text-white text-center font-bold`}>
           Connexion
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={tw`p-3 bg-blue-200 dark:bg-blue-800 rounded-lg mt-4`}
+        onPress={() => router.push("/auth/qr-scan")}
+      >
+        <Text style={tw`text-black dark:text-white text-center font-bold`}>
+          Scanner un QR Code
         </Text>
       </TouchableOpacity>
 
